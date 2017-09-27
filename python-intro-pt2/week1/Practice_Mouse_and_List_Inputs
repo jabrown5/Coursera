@@ -1,0 +1,175 @@
+###################################################
+###################################################
+# 1 For each mouse click, print the position of the mouse click to the console.
+# http://www.codeskulptor.org/#user43_Crja8GSEjt_0.py
+
+# Echo mouse click in console
+
+###################################################
+# Student should enter code below
+
+import simplegui
+
+# intialize globals
+WIDTH = 450
+HEIGHT = 300
+
+def click(pos):
+    print "Mouse Click at " + str(pos)
+    
+# create frame
+frame = simplegui.create_frame("Mouse selection", WIDTH, HEIGHT)
+frame.set_canvas_background("White")
+
+# register event handler
+frame.set_mouseclick_handler(click)
+
+# start frame
+frame.start()
+
+
+
+###################################################
+###################################################
+# 2 Modify the program template below so that clicking inside any of the three displayed circles prints the color of the clicked circle to the console. Hint: Use the supplied function 𝚍𝚒𝚜𝚝 to compute the distance between the center of each circle and the mouse click
+# http://www.codeskulptor.org/#user43_WvEY80AfEp_0.py
+
+# Circle clicking problem
+
+###################################################
+# Student should enter code below
+
+import simplegui
+import math
+
+# define global constants
+RADIUS = 20
+RED_POS = [50, 100]
+GREEN_POS = [150, 100]
+BLUE_POS = [250, 100]
+
+# define helper function
+def dist(p, q):
+    return math.sqrt((p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2)
+
+# define mouseclick handler
+def click(pos):
+    if dist([RED_POS[0], RED_POS[1]], pos) < RADIUS:
+        print "You've clicked the RED ball."
+    elif dist([GREEN_POS[0], GREEN_POS[1]], pos) < RADIUS:
+        print "You've clicked the GREEN ball."          
+    elif dist([BLUE_POS[0], BLUE_POS[1]], pos) < RADIUS:
+        print "You've clicked the BLUE ball."  
+    else:
+        print "You haven't clicked a ball!!"
+
+# define draw
+def draw(canvas):
+    canvas.draw_circle(RED_POS, RADIUS, 1, "Red", "Red")
+    canvas.draw_circle(GREEN_POS, RADIUS, 1, "Green", "Green")
+    canvas.draw_circle(BLUE_POS, RADIUS, 1, "Blue", "Blue")
+    
+# create frame and register handlers
+frame = simplegui.create_frame("Echo click", 300, 200)
+frame.set_mouseclick_handler(click)
+frame.set_draw_handler(draw)
+
+# start frame
+frame.start()
+
+
+
+###################################################
+###################################################
+# 3  Write a function 𝚍𝚊𝚢_𝚝𝚘_𝚗𝚞𝚖𝚋𝚎𝚛(𝚍𝚊𝚢) that takes the supplied global list 𝚍𝚊𝚢_𝚕𝚒𝚜𝚝 and returns the position of the given day in that list. You can either use the Docs to locate the appropriate list method or write a 𝚏𝚘𝚛 loop to implement this function.
+#  http://www.codeskulptor.org/#user43_WZiJCoh8Mc_0.py
+
+# Day to number problem
+
+###################################################
+# Student should enter code below
+
+day_list = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
+def day_to_number(days):
+    if days in day_list:
+        return day_list.index(days)
+        
+###################################################
+# Test data
+
+print day_to_number("Sunday")
+print day_to_number("Monday")
+print day_to_number("Tuesday")
+print day_to_number("Wednesday")
+print day_to_number("Thursday")
+print day_to_number("Friday")
+print day_to_number("Saturday")
+
+
+
+###################################################
+###################################################
+#4  Write a function 𝚜𝚝𝚛𝚒𝚗𝚐_𝚕𝚒𝚜𝚝_𝚓𝚘𝚒𝚗(𝚜𝚝𝚛𝚒𝚗𝚐_𝚕𝚒𝚜𝚝) that takes a list of strings as input and returns a single string that is the concatenation of the strings in the list. We recommend using a 𝚏𝚘𝚛 loop to implement this function. 
+#  http://www.codeskulptor.org/#user43_yZtPBh7idH_0.py
+
+# String list joining problem
+
+###################################################
+# Student should enter code below
+
+def string_list_join(input):
+    return ''.join(input)
+
+###################################################
+# Test data
+
+print string_list_join([])
+print string_list_join(["pig", "dog"])
+print string_list_join(["spam", " and ", "eggs"])
+print string_list_join(["a", "b", "c", "d"])
+
+
+
+###################################################
+###################################################
+#5  Complete the given program template to produce a program that fills the canvas with a 10x10 grid of touching balls of the given size. You should use two 𝚏𝚘𝚛 loops, one nested inside the other, placed in the draw handler. 
+#  http://www.codeskulptor.org/#user43_TDFH4ECfY9_0.py
+
+# Ball grid slution
+
+###################################################
+# Student should enter code below
+
+import simplegui
+
+BALL_RADIUS = 20
+GRID_SIZE = 10
+WIDTH = 2 * GRID_SIZE * BALL_RADIUS
+HEIGHT = 2 * GRID_SIZE * BALL_RADIUS
+
+
+# define draw
+def draw(canvas):
+    for tall in range(GRID_SIZE):
+        for wide in range(GRID_SIZE):
+            canvas.draw_circle([2*BALL_RADIUS*wide+BALL_RADIUS, 2*BALL_RADIUS*tall+BALL_RADIUS], BALL_RADIUS, 1, "Red", "Green")
+
+
+# create frame and register handlers
+frame = simplegui.create_frame("Ball grid", WIDTH, HEIGHT)
+frame.set_draw_handler(draw)
+
+# start frame
+frame.start()
+
+
+
+###################################################
+###################################################
+Challenge: Write a program that draws a polyline (an open polygon) based on a sequence of mouse clicks. The first click should create a point. Subsequent clicks should add a new segment to the polyline. You should include a “Clear” button that deletes the polyline and restarts the drawing process. 
+#  
+
+
+
+
